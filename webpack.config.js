@@ -1,11 +1,12 @@
 const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-  entry: './src/index.js',
+  entry: {
+    index: './src/index.jsx', // Entrada principal
+  },
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'bundle.js'
+    filename: '[name].js', // Saída dinâmica: main.js para index.js e form.js para form.js
   },
   module: {
     rules: [
@@ -13,18 +14,12 @@ module.exports = {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         use: {
-          loader: 'babel-loader'
-        }
-      }
-    ]
+          loader: 'babel-loader',
+        },
+      },
+    ],
   },
-  plugins: [
-    new HtmlWebpackPlugin({
-      template: './public/index.html'
-    })
-  ],
-  devServer: {
-    contentBase: path.resolve(__dirname, 'dist'),
-    hot: true
-  }
+  resolve: {
+    extensions: ['.js', '.jsx'],
+  },
 };
