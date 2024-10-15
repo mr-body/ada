@@ -4,6 +4,7 @@ const path = require('path');
 const app = express();
 
 app.use(express.static(path.resolve(__dirname, 'dist'))); // Usa caminho absoluto
+app.use(express.static(path.resolve(__dirname, 'static'))); // Usa caminho absoluto
 
 // Corrigir o caminho absoluto para o index.html
 app.get('/dev', (req, res) => {
